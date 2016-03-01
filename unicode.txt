@@ -1,0 +1,6 @@
+Top element: ⊤ (22a4)
+bottom element: ⊥ (22a5)
+less restrictive than: ⊑ (2291)
+more restrictive than: ⊒ (2292)
+meet: ⊓ (2293)
+join: ⊔ (2294)

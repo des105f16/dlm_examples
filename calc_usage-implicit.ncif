@@ -1,0 +1,29 @@
+principal u, ec, a;
+
+typedef struct usage {
+  int {{u->u}} start_time;
+  int {{u->u}} usageWh;
+} usage;
+
+typedef struct price {
+  int {{ec->*}} start_time;
+  int {{ec->*}} priceEars;
+} price;
+
+int {{usages ⊔ prices}} calc_usage(usage *usages, int usages_count, price *prices, int prices_count) {
+  int result = 0; // ⊥ ⊑ result
+
+  int i // ⊥ ⊑ i
+  int j; // ⊥ ⊑ j
+  for (i = 0, j = 0; i < usages_count; i++) { // ⊥ ⊑ i, j ; i ⊔ usages_count = L1 ; i ⊔ L1 ⊑ i
+    while (j < prices_count-1 && prices[j+1].start_time <= usages[i].start_time) { // j ⊔ prices_count ⊔ prices ⊔ {{ec->*}} ⊔ usages ⊔ {{u->u}} ⊔ i ⊔ L1 = L2
+      j++ // L1 ⊔ L2 ⊔ j ⊑ j
+    }
+    result += usages[i].usageWh * prices[j].priceEars; // result ⊔ usages ⊔ {{u->u}} ⊔ i ⊔ j ⊔ prices ⊔ {{ec->*}} ⊔ L1 ⊑ result
+  }
+
+  if_acts_for(calc_usage, a) { // ⊥
+    return declassify(result); // ⊥ | result ⊑ Ld ⊔ {{a->_}} | Ld ⊑ {{usages ⊔ prices}}
+  }
+  return -1; // ⊥ ⊑ {{usages ⊔ prices}}
+}

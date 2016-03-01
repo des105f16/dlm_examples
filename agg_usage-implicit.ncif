@@ -1,0 +1,18 @@
+typedef struct t_usage {
+  int {{a->a}} start_time;
+  int {{a->a}} usageWh;
+}
+
+int {{udata}} agg_usage(t_usage *udata, int {{_->*}} udata_size) {
+  int sum = 0; // ⊥
+  int i; // ⊥
+
+  for (i = 0; i < udata_size; i++) { // i ⊔ udata_size = L1
+    sum += udata[i].usageWh; // sum ⊔ udata ⊔ udata.usageWh ⊔ i ⊔ L1 ⊑ sum
+  }
+
+  if_acts_for(agg_usage, a) {
+    return declassify(sum); // sum ⊑ Ld ⊔ {{a->_}} | Ld ⊑ udata
+  }
+  return -1; // ⊥ ⊑ udata
+}

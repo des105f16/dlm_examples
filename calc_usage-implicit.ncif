@@ -10,7 +10,7 @@ typedef struct price {
   int {{ec->*}} priceEars;
 } price;
 
-int {{usages ⊔ prices}} calc_usage(usage *usages, int usages_count, price *prices, int prices_count) {
+int {{usages ⊔ prices}} calc_usage(usage *usages, int {{_->*}} usages_count, price *prices, int {{_->*}} prices_count) {
   int result = 0; // ⊥ ⊑ result
 
   int i // ⊥ ⊑ i
@@ -22,8 +22,12 @@ int {{usages ⊔ prices}} calc_usage(usage *usages, int usages_count, price *pri
     result += usages[i].usageWh * prices[j].priceEars; // result ⊔ usages ⊔ {{u->u}} ⊔ i ⊔ j ⊔ prices ⊔ {{ec->*}} ⊔ L1 ⊑ result
   }
 
-  if_acts_for(calc_usage, a) { // ⊥
-    return declassify(result); // ⊥ | result ⊑ Ld ⊔ {{a->_}} | Ld ⊑ {{usages ⊔ prices}}
+  if_acts_for(calc_usage, a) {
+    if_acts_for(calc_usage, u) {
+      if_acts_for(calc_usage, ec) {
+        return declassify(result); // ⊥ | result ⊑ Ld ⊔ {{a->_, u->_, ec->_}} | Ld ⊑ {{usages ⊔ prices}}
+      }
+    }
   }
   return -1; // ⊥ ⊑ {{usages ⊔ prices}}
 }

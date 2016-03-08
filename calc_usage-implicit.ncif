@@ -1,4 +1,6 @@
-principal u, ec, a;
+﻿principal u;
+principal ec;
+principal a;
 
 typedef struct usage {
   int {{u->u}} start_time;
@@ -6,27 +8,30 @@ typedef struct usage {
 } usage;
 
 typedef struct price {
-  int {{ec->*}} start_time;
-  int {{ec->*}} priceEars;
+  int {{ec->u, ec, a}} start_time;
+  int {{ec->u, ec, a}} priceEars;
 } price;
 
-int {{usages ⊔ prices}} calc_usage(usage *usages, int {{_->*}} usages_count, price *prices, int {{_->*}} prices_count) {
+int {{usages; prices}} calc_usage(usage *usages, int {{_}} usages_count, price *prices, int {{_}} prices_count) {
   int result = 0; // ⊥ ⊑ result
 
-  int i // ⊥ ⊑ i
-  int j; // ⊥ ⊑ j
-  for (i = 0, j = 0; i < usages_count; i++) { // ⊥ ⊑ i, j ; i ⊔ usages_count = L1 ; i ⊔ L1 ⊑ i
-    while (j < prices_count-1 && prices[j+1].start_time <= usages[i].start_time) { // j ⊔ prices_count ⊔ prices ⊔ {{ec->*}} ⊔ usages ⊔ {{u->u}} ⊔ i ⊔ L1 = L2
-      j++ // L1 ⊔ L2 ⊔ j ⊑ j
+  int i = 0; // ⊥ ⊑ i
+  int j = 0; // ⊥ ⊑ j
+  int j2 = 1;
+  while (i < usages_count) { // ⊥ ⊑ i, j ; i ⊔ usages_count = L1 ; i ⊔ L1 ⊑ i
+    while (j < prices_count-1 && prices[j2].start_time <= usages[i].start_time) { // j ⊔ prices_count ⊔ prices ⊔ {{ec->*}} ⊔ usages ⊔ {{u->u}} ⊔ i ⊔ L1 = L2
+        j = j + 1; // L1 ⊔ L2 ⊔ j ⊑ j
+        j2 = j2 + 1;
     }
-    result += usages[i].usageWh * prices[j].priceEars; // result ⊔ usages ⊔ {{u->u}} ⊔ i ⊔ j ⊔ prices ⊔ {{ec->*}} ⊔ L1 ⊑ result
+    result = result + usages[i].usageWh * prices[j].priceEars; // result ⊔ usages ⊔ {{u->u}} ⊔ i ⊔ j ⊔ prices ⊔ {{ec->*}} ⊔ L1 ⊑ result
+    i = i + 1;
   }
 
-  if_acts_for(calc_usage, a) {
-    if_acts_for(calc_usage, u) {
-      if_acts_for(calc_usage, ec) {
-        return declassify(result); // ⊥ | result ⊑ Ld ⊔ {{a->_, u->_, ec->_}} | Ld ⊑ {{usages ⊔ prices}}
-      }
+  calc_usage -->? a {
+    calc_usage -->? u {
+        calc_usage -->? ec {
+            return <|result|>; // ⊥ | result ⊑ Ld ⊔ {{a->_, u->_, ec->_}} | Ld ⊑ {{usages ⊔ prices}}
+        }
     }
   }
   return -1; // ⊥ ⊑ {{usages ⊔ prices}}

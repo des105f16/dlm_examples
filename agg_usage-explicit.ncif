@@ -1,18 +1,21 @@
+﻿principal a;
+principal c;
+
 typedef struct t_usage {
   int {{a->a}} start_time;
   int {{a->a}} usageWh;
-}
+} t_usage;
 
-int {{c->a}} agg_usage(t_usage {{_->*}} *udata, int {{_->*}} udata_size) {
-  int {{c->a, a->a}} sum = 0; // ⊥
-  int {{a->a}} i; // ⊥
+int {{c->a}} agg_usage(t_usage {{_}} *udata, int {{_}} udata_size) {
+  int {{c->a; a->a}} sum = 0; // ⊥
+  int {{a->a}} i = 0; // ⊥
 
-  for (i = 0; i < udata_size; i++) { // {{a->a, _->*}}
-    sum += udata[i].usageWh; // {{a->a}} ⊑ {{c->a, a->a}}
+  while (i < udata_size) { // {{a->a, _->*}}
+    sum = sum +  udata[i].usageWh; // {{a->a}} ⊑ {{c->a, a->a}}
   }
 
-  if_acts_for(agg_usage, a) {
-    return declassify(sum, {{c->a}}); // {{c->a}} ⊑ {{c->a}}
+  agg_usage -->? a {
+    return <|sum, {{c->a}}|>; // {{c->a}} ⊑ {{c->a}}
   }
   return -1; // ⊥ ⊑ {{c->a}}
 }

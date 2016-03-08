@@ -1,4 +1,6 @@
-principal u, ec, a;
+﻿principal u;
+principal ec;
+principal a;
 
 typedef struct usage {
   int {{u->u}} start_time;
@@ -6,23 +8,27 @@ typedef struct usage {
 } usage;
 
 typedef struct price {
-  int {{ec->*}} start_time;
-  int {{ec->*}} priceEars;
+  int {{ec->u, ec, a}} start_time;
+  int {{ec->u, ec, a}} priceEars;
 } price;
 
-int {{u->ec}} calc_usage(usage {{_->*}} *usages, int {{_->*}} usages_count, price {{_->*}} *prices, int {{_->*}} prices_count) {
+int {{u->ec}} calc_usage(usage {{_}} *usages, int {{_}} usages_count, price {{_}} *prices, int {{_}} prices_count) {
   int {{u->u}} result = 0; // ⊥
 
-  int {{a->a}} i, j; // ⊥
-  for (i = 0, j = 0; i < usages_count; i++) { // i ⊔ j ⊔ usages_count = {{a->a, _->*}}
-    while (j < prices_count-1 && prices[j+1].start_time <= usages[i].start_time) {
+  int {{a->a}} i = 0;
+  int {{a->a}} j = 0; // ⊥
+  int {{a->}} j2 = 1;
+  while (i < usages_count) { // i ⊔ j ⊔ usages_count = {{a->a, _->*}}
+    while ((j < prices_count-1) && (prices[j2].start_time <= usages[i].start_time)) {
       j = j + 1; //i ⊔ j ⊔ prices_count ⊔ prices.start_time ⊔ usages.start_time = {{a->a, _->*, ec->*, u->u}}
+      j2 = j2 + 1;
     } // j {{a->a, _->*, ec->*, u->u}}
-    result += usages[i].usageWh * prices[j].priceEars; // i ⊔ j ⊔ usages_count = {{a->a, _->*}}
+    result = result + usages[i].usageWh * prices[j].priceEars; // i ⊔ j ⊔ usages_count = {{a->a, _->*}}
+    i = i + 1;
   } // result {{a->a, _->*, u->u, ec->*}}
 
-  if_acts_for(calc_usage, a) {
-    return declassify(result, {u->ec});
+  calc_usage -->? u {
+    return <|result, {{u->ec}}|>;
   }
   return -1;
 }

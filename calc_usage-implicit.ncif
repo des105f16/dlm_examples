@@ -27,12 +27,8 @@ int {{usages; prices}} calc_usage(usage *usages, int {{_}} usages_count, price *
     i = i + 1;
   }
 
-  calc_usage -->? a {
-    calc_usage -->? u {
-        calc_usage -->? ec {
-            return <|result|>; // ⊥ | result ⊑ Ld ⊔ {{a->_, u->_, ec->_}} | Ld ⊑ {{usages ⊔ prices}}
-        }
-    }
+  calc_usage -->? u, ec {
+    return <|result|>; // ⊥ | result ⊑ Ld ⊔ {{a->_, u->_, ec->_}} | Ld ⊑ {{usages ⊔ prices}}
   }
   return -1; // ⊥ ⊑ {{usages ⊔ prices}}
 }

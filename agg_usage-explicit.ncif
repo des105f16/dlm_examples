@@ -1,5 +1,4 @@
-﻿principal a;
-principal c;
+﻿principal a, c;
 
 typedef struct t_usage {
   int {{a->a}} start_time;
@@ -14,7 +13,7 @@ int {{c->a}} agg_usage(t_usage {{_}} *udata, int {{_}} udata_size) {
     sum = sum +  udata[i].usageWh; // {{a->a}} ⊑ {{c->a, a->a}}
   }
 
-  agg_usage -->? a {
+  this -->? a {
     return <|sum, {{c->a}}|>; // {{c->a}} ⊑ {{c->a}}
   }
   return -1; // ⊥ ⊑ {{c->a}}

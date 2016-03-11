@@ -13,7 +13,7 @@ int {{udata}} agg_usage(t_usage *udata, int {{_}} udata_size) {
     sum = sum + udata[i].usageWh; // sum ⊔ udata ⊔ udata.usageWh ⊔ i ⊔ L1 ⊑ sum
   }
 
-  agg_usage -->? a {
+  this -->? a {
     return <|sum|>; // sum ⊑ Ld ⊔ {{a->_}} | Ld ⊑ udata
   }
   return -1; // ⊥ ⊑ udata

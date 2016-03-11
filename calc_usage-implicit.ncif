@@ -1,6 +1,4 @@
-﻿principal u;
-principal ec;
-principal a;
+﻿principal u, ec, a;
 
 typedef struct usage {
   int {{u->u}} start_time;
@@ -27,7 +25,7 @@ int {{usages; prices}} calc_usage(usage *usages, int {{_}} usages_count, price *
     i = i + 1;
   }
 
-  calc_usage -->? u, ec {
+  this -->? u, ec {
     return <|result|>; // ⊥ | result ⊑ Ld ⊔ {{a->_, u->_, ec->_}} | Ld ⊑ {{usages ⊔ prices}}
   }
   return -1; // ⊥ ⊑ {{usages ⊔ prices}}

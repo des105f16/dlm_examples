@@ -1,8 +1,8 @@
 ﻿principal u, ec, a;
 
 typedef struct usage {
-  int {{u->u}} start_time;
-  int {{u->u}} usageWh;
+  int {{u->u,a}} start_time;
+  int {{u->u,a}} usageWh;
 } usage;
 
 typedef struct price {
@@ -11,10 +11,10 @@ typedef struct price {
 } price;
 
 int {{u->ec}} calc_usage(usage {{_}} *usages, int {{_}} usages_count, price {{_}} *prices, int {{_}} prices_count) {
-  int {{u->u}} result = 0; // ⊥
+  int {{u->a; a->a; ec->a}} result = 0; // ⊥
 
-  int {{a->a; u->a; ec->a}} i = 0;
-  int {{a->a; u->a; ec->a}} j = 0; // ⊥
+  int {{a->a}} i = 0;
+  int {{u->a; a->a; ec->a}} j = 0; // ⊥
   while (i < usages_count) { // i ⊔ j ⊔ usages_count = {{a->a, _->*}}
   while ((j < prices_count-1) && (prices[j+1].start_time <= usages[i].start_time)) {
         j = j + 1; //i ⊔ j ⊔ prices_count ⊔ prices.start_time ⊔ usages.start_time = {{a->a, _->*, ec->*, u->u}}

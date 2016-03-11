@@ -13,13 +13,11 @@ typedef struct price {
 int {{u->ec}} calc_usage(usage {{_}} *usages, int {{_}} usages_count, price {{_}} *prices, int {{_}} prices_count) {
   int {{u->u}} result = 0; // ⊥
 
-  int {{a->a}} i = 0;
-  int {{a->a}} j = 0; // ⊥
-  int {{a->a}} j2 = 1;
+  int {{a->a; u->a; ec->a}} i = 0;
+  int {{a->a; u->a; ec->a}} j = 0; // ⊥
   while (i < usages_count) { // i ⊔ j ⊔ usages_count = {{a->a, _->*}}
-  while ((j < prices_count-1) && (prices[j2].start_time <= usages[i].start_time)) {
-      j = j + 1; //i ⊔ j ⊔ prices_count ⊔ prices.start_time ⊔ usages.start_time = {{a->a, _->*, ec->*, u->u}}
-      j2 = j2 + 1;
+  while ((j < prices_count-1) && (prices[j+1].start_time <= usages[i].start_time)) {
+        j = j + 1; //i ⊔ j ⊔ prices_count ⊔ prices.start_time ⊔ usages.start_time = {{a->a, _->*, ec->*, u->u}}
     } // j {{a->a, _->*, ec->*, u->u}}
     result = result + usages[i].usageWh * prices[j].priceEars; // i ⊔ j ⊔ usages_count = {{a->a, _->*}}
     i = i + 1;

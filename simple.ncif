@@ -1,0 +1,10 @@
+﻿principal s;
+
+int {{a;b}} foo(int a, int b) {
+    int {{s->s}} secret = 1;
+    
+    if (secret < 1)
+        return a;
+    else
+        return b;
+}

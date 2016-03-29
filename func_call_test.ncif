@@ -1,0 +1,10 @@
+﻿principal a;
+
+int {{x}} foo(int {{a->a}} x) {}
+
+int {{a->a}} bar() {
+    int x2 = 5;
+    int {{a->a}} y = foo(x2);
+    
+    return y;
+}

@@ -1,8 +1,8 @@
 ﻿principal u, ec;
 
 typedef struct usage {
-  int {{u->u,a}} start_time;
-  int {{u->u,a}} usageWh;
+  int {{u->u}} start_time;
+  int {{u->u}} usageWh;
 } usage;
 
 typedef struct price {

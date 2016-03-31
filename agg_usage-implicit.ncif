@@ -6,15 +6,15 @@ typedef struct t_usage {
 } t_usage;
 
 int {{udata}} agg_usage(t_usage *udata, int {{_}} udata_size) {
-  int sum = 0; // ⊥
-  int i = 0; // ⊥
+  int sum = 0;
+  int i = 0;
 
-  while (i < udata_size) { // i ⊔ udata_size = L1
-    sum = sum + udata[i].usageWh; // sum ⊔ udata ⊔ udata.usageWh ⊔ i ⊔ L1 ⊑ sum
+  while (i < udata_size) {
+    sum = sum + udata[i].usageWh;
   }
 
   this -->? a {
-    return <|sum|>; // sum ⊑ Ld ⊔ {{a->_}} | Ld ⊑ udata
+    return <|sum|>;
   }
-  return -1; // ⊥ ⊑ udata
+  return -1;
 }

@@ -11,22 +11,22 @@ typedef struct price {
 } price;
 
 int {{usages; prices}} calc_usage(usage *usages, int {{_}} usages_count, price *prices, int {{_}} prices_count) {
-  int result = 0; // ⊥ ⊑ result
+  int result = 0;
 
-  int i = 0; // ⊥ ⊑ i
-  int j = 0; // ⊥ ⊑ j
+  int i = 0;
+  int j = 0;
   int j2 = 1;
-  while (i < usages_count) { // ⊥ ⊑ i, j ; i ⊔ usages_count = L1 ; i ⊔ L1 ⊑ i
-    while (j < prices_count-1 && prices[j2].start_time <= usages[i].start_time) { // j ⊔ prices_count ⊔ prices ⊔ {{ec->*}} ⊔ usages ⊔ {{u->u}} ⊔ i ⊔ L1 = L2
-        j = j + 1; // L1 ⊔ L2 ⊔ j ⊑ j
+  while (i < usages_count) {
+    while (j < prices_count-1 && prices[j2].start_time <= usages[i].start_time) {
+        j = j + 1;
         j2 = j2 + 1;
     }
-    result = result + usages[i].usageWh * prices[j].priceEars; // result ⊔ usages ⊔ {{u->u}} ⊔ i ⊔ j ⊔ prices ⊔ {{ec->*}} ⊔ L1 ⊑ result
+    result = result + usages[i].usageWh * prices[j].priceEars;
     i = i + 1;
   }
 
   this ?> u, ec {
-    return <|result|>; // ⊥ | result ⊑ Ld ⊔ {{a->_, u->_, ec->_}} | Ld ⊑ {{usages ⊔ prices}}
+    return <|result|>;
   }
-  return -1; // ⊥ ⊑ {{usages ⊔ prices}}
+  return -1;
 }

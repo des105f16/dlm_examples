@@ -1,0 +1,33 @@
+principal c, ec;
+
+typedef struct t_usage {
+  int start_time;
+  int usageWh;
+} t_usage;
+
+int {{c->c, ec@30m*2}} getUsage();
+
+int agg_usage() { //inferred {{c->c, ec@30m*2}}
+  int count = 100;
+  t_usage udata[count] = getUsage(); //input slot
+  int sum = 0;
+  int i = 0;
+
+  while (i < count) {
+    sum = sum +  udata[i].usageWh;
+  }
+
+  return sum;
+}
+
+int main(int argc, char *argv) {
+
+    while (handleRequests)
+      if (requester == ec)
+        sendToElectricalCompany(@?agg_usage ? agg_usage() : -1);
+        // or
+        sendToElectricalCompany(@agg_usage());
+      else if (requester == c)
+        writeToConsumer(agg_usage());
+  return 0;
+}

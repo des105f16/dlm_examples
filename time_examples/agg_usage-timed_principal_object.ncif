@@ -1,0 +1,32 @@
+principal c, ec;
+
+typedef struct t_usage {
+  int start_time;
+  int usageWh;
+} t_usage;
+
+t_usage {{c->c, ec@30m*2}} * getUsage();
+void {{output->c, ec}} sendResponse(int usage);
+
+int agg_usage() { // inferred {{c->c, ec@30m*2}}
+  int count = 100;
+  t_usage udata[count] = getUsage(); //input slot
+  int sum = 0;
+  int i = 0;
+
+  while (i < count) {
+    sum = sum +  udata[i].usageWh;
+  }
+
+  return sum;
+}
+
+int main(int argc, char *argv) {
+
+    while (handleRequests) {
+      principal current = request.user;
+      this -->? current
+        sendResponse(@agg_usage());
+    }
+  return 0;
+}

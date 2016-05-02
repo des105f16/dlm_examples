@@ -5,9 +5,9 @@ typedef struct t_usage {
   int usageWh;
 } t_usage;
 
-input int {{c->c, ec@30m*2}} getUsage();
-output void {{c->c}} writeToConsumer(int usage);
-output void {{c->ec}} sendToElectricalCompany(int usage);
+int {{c->c, ec@30m*2}} getUsage();
+void {{output->c}} writeToConsumer(int usage);
+void {{output->ec}} sendToElectricalCompany(int usage);
 
 int agg_usage() { // inferred {{c->c, ec@30m*2}}
   int count = 100;
@@ -24,12 +24,13 @@ int agg_usage() { // inferred {{c->c, ec@30m*2}}
 
 int main(int argc, char *argv) {
 
-    while (handleRequests)
+    while (handleRequests) {
       if (requester == ec)
         sendToElectricalCompany(@?agg_usage ? agg_usage() : -1);
         // or
-        sendToElectricalCompany(@agg_usage());
+        // sendToElectricalCompany(@agg_usage());
       else if (requester == c)
         writeToConsumer(agg_usage());
+    }
   return 0;
 }

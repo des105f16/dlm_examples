@@ -6,6 +6,7 @@ typedef struct user_info {
   char password[20];
 } user_info;
 
+user_info get_login();
 user_info* get_users();
 void send_response(bool is_match);
 
@@ -26,6 +27,7 @@ bool check_password(char *username, char *password) {
 }
 
 int main(int argc, char **argv) {
-  bool is_match = check_password(argv[1], argv[2]);
+  user_info login = get_login();
+  bool is_match = check_password(login.username, login.password);
   send_response(is_match);
 }

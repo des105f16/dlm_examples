@@ -11,7 +11,7 @@ typedef struct price {
 } price;
 
 usage {{u->}} *get_latest_usage(){}
-price {{_}} *get_latest_prices(){}
+price *get_latest_prices(){}
 void {{output->u}} send_to_consumer(int bill){}
 void {{output->ec}} send_to_electrical_company(int bill){}
 
@@ -20,7 +20,7 @@ int {{u->u, ec}} calculate_bill() {
   int prices_count = 100;
   usage *latest_usage = get_latest_usage();
   price *latest_prices = get_latest_prices();
-  int {{u->; s->}} result = 0;
+  int result = 0;
 
   int i = 0;
   int j = 0;

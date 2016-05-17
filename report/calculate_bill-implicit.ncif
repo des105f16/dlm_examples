@@ -1,4 +1,4 @@
-﻿principal u, ec, s, output;
+principal u, ec, s, output;
 
 typedef struct usage {
   int start_time;

@@ -10,8 +10,8 @@ typedef struct price {
 
 usage *get_latest_usage();
 price *get_latest_prices();
-void send_to_consumer(int bill);
-void send_to_electrical_company(int bill);
+void send_to_consumer(int bill_total);
+void send_to_electrical_company(int bill_total);
 
 int calculate_bill() {
   int usage_count = 100;
@@ -33,7 +33,7 @@ int calculate_bill() {
 }
 
 int main(int argc, char **argv) {
-  int bill = calculate_bill();
+  int bill_total = calculate_bill();
   send_to_consumer(bill);
   send_to_electrical_company(bill);
 }

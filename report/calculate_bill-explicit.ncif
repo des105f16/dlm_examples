@@ -38,6 +38,6 @@ int {{u->u, ec}} calculate_bill() {
 
 int main(int argc, char **argv) {
   int {{u->u, ec}} bill_total = calculate_bill();
-  send_to_consumer(bill);
-  send_to_electrical_company(bill);
+  send_to_consumer(bill_total);
+  send_to_electrical_company(bill_total);
 }

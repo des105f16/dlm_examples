@@ -31,13 +31,13 @@ int {{u->u, ec}} calculate_bill() {
     result = result + latest_usage[i].usage_in_Wh * latest_prices[j].price_in_cents;
     i = i + 1;
   }
-  this -->? u, s {
+  this -->? s {
     return <|result|>;
   }
 }
 
 int main(int argc, char **argv) {
   int bill_total = calculate_bill();
-  send_to_consumer(bill);
-  send_to_electrical_company(bill);
+  send_to_consumer(bill_total);
+  send_to_electrical_company(bill_total);
 }

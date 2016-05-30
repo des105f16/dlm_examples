@@ -15,12 +15,25 @@ price {{_}} *get_latest_prices();
 u <- void send_to_consumer(int bill_total);
 ec <- void send_to_electrical_company(int bill_total);
 
+usage *get_latest_usage_timed()
+{
+  this -->? u
+    return @get_latest_usage();
+  else if (@?get_latest_usage)
+    return get_latest_usage();
+  else
+    return NULL;
+}
+
 int {{u->u, ec}} calculate_bill() {
   int usage_count = 100;
   int prices_count = 100;
-  usage *latest_usage = get_latest_usage();
+  usage *latest_usage = get_latest_usage_timed();
   price *latest_prices = get_latest_prices();
   int result = 0;
+
+  if (usage == NULL)
+    return -1;
 
   int i = 0;
   int j = 0;

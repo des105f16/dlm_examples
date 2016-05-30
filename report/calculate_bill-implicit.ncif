@@ -10,10 +10,10 @@ typedef struct price {
   int price_in_cents;
 } price;
 
-usage {{u->u, ec}} *get_latest_usage(){}
-price {{_}} *get_latest_prices(){}
-u <- void send_to_consumer(int bill_total){}
-ec <- void send_to_electrical_company(int bill_total){}
+usage {{u->u, ec}} *get_latest_usage();
+price {{_}} *get_latest_prices();
+u <- void send_to_consumer(int bill_total);
+ec <- void send_to_electrical_company(int bill_total);
 
 int {{u->u, ec}} calculate_bill() {
   int usage_count = 100;
